@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/overview">
+
+    <fragment
+        android:id="@+id/overview"
+        android:name="com.sk.outlay.ui.overview.OverviewFragment"
+        android:label="Overview">
+        <action
+            android:id="@+id/action_overview_to_transaction"
+            app:destination="@id/transaction"
+            app:enterAnim="@anim/slide_in_from_bottom"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_down_to_bottom" />
+        <action
+            android:id="@+id/action_overview_to_accounts"
+            app:destination="@id/accounts"
+            app:enterAnim="@anim/slide_in_from_bottom"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_down_to_bottom" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/accounts"
+        android:name="com.sk.outlay.ui.accounts.AccountsFragment"
+        android:label="Accounts">
+        <action
+            android:id="@+id/action_accounts_to_account_editor"
+            app:destination="@id/account_editor"
+            app:enterAnim="@anim/slide_in_from_bottom"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_down_to_bottom" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/account_editor"
+        android:name="com.sk.outlay.ui.accounts.AccountEditorFragment"
+        android:label="Account Editor">
+        <argument
+            android:name="accountId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transaction"
+        android:name="com.sk.outlay.ui.transactions.AddTransactionFragment"
+        android:label="Transaction">
+        <argument
+            android:name="transactionId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="repeatTransaction"
+            android:defaultValue="false"
+            app:argType="boolean"
+            app:nullable="false" />
+    </fragment>
+
+</navigation>
