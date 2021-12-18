@@ -8,8 +8,14 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.sk.outlay.data.converters.LocalDateTimeConverter
 import com.sk.outlay.data.converters.UuidRoomTypeConverter
-import com.sk.outlay.data.dao.*
-import com.sk.outlay.data.entities.*
+import com.sk.outlay.data.dao.AccountDao
+import com.sk.outlay.data.dao.BudgetDao
+import com.sk.outlay.data.dao.CategoryDao
+import com.sk.outlay.data.dao.TransactionDao
+import com.sk.outlay.data.entities.Account
+import com.sk.outlay.data.entities.Budget
+import com.sk.outlay.data.entities.Category
+import com.sk.outlay.data.entities.Transaction
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -17,8 +23,8 @@ import kotlinx.coroutines.launch
 @Database(
     entities = [
         Account::class,
+        Budget::class,
         Category::class,
-        Cycle::class,
         Transaction::class,
     ],
     version = 1,
@@ -30,8 +36,8 @@ import kotlinx.coroutines.launch
 )
 abstract class OutlayDatabase : RoomDatabase() {
     abstract fun accountDao(): AccountDao
+    abstract fun budgetDao(): BudgetDao
     abstract fun categoryDao(): CategoryDao
-    abstract fun cycleDao(): CycleDao
     abstract fun transactionDao(): TransactionDao
 
     companion object {
@@ -77,8 +83,8 @@ abstract class OutlayDatabase : RoomDatabase() {
 
         suspend fun seedData(db: OutlayDatabase) {
             with(db) {
-                cycleDao().insert(SeedData.cycle)
                 accountDao().insert(SeedData.accounts)
+                budgetDao().insert(SeedData.budget)
                 categoryDao().insert(SeedData.categories)
                 transactionDao().insert(SeedData.transaction)
             }

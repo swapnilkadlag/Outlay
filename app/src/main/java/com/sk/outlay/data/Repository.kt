@@ -1,8 +1,8 @@
 package com.sk.outlay.data
 
-import com.sk.outlay.data.dao.TotalExpensesAmount
 import com.sk.outlay.data.entities.Account
 import com.sk.outlay.data.enums.AccountType
+import com.sk.outlay.data.models.TotalExpensesAmount
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 

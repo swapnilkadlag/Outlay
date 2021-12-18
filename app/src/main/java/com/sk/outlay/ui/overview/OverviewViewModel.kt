@@ -2,7 +2,7 @@ package com.sk.outlay.ui.overview
 
 import androidx.lifecycle.ViewModel
 import com.sk.outlay.data.Repository
-import com.sk.outlay.data.dao.TotalExpensesAmount
+import com.sk.outlay.data.models.TotalExpensesAmount
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

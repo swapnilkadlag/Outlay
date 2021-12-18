@@ -1,7 +1,6 @@
 package com.sk.outlay.ui.overview
 
 import android.content.res.Configuration
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -10,26 +9,17 @@ import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.statusBarsPadding
-import com.sk.outlay.data.dao.TotalExpensesAmount
-import com.sk.outlay.data.enums.AccountType
 import com.sk.outlay.theme.OutlayTheme
 import com.sk.outlay.theme.secondaryFont
-import com.sk.outlay.ui.accounts.AccountDetails
-import com.sk.outlay.ui.accounts.AccountName
-import com.sk.outlay.ui.accounts.AccountType
-import com.sk.outlay.ui.common.*
-import java.text.NumberFormat
-import java.util.*
+import com.sk.outlay.ui.common.AddFab
+import com.sk.outlay.ui.common.HorizontalSpace
+import com.sk.outlay.ui.common.Toolbar
+import com.sk.outlay.ui.common.VerticalSpace
 
 @Composable
 fun OverviewNavigationButton(title: String, icon: ImageVector, onClick: () -> Unit) {
@@ -48,10 +38,18 @@ fun OverviewNavigationButton(title: String, icon: ImageVector, onClick: () -> Un
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(imageVector = icon, contentDescription = null, tint = MaterialTheme.colors.primary)
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = MaterialTheme.colors.primary
+            )
             HorizontalSpace(space = 16.dp)
             Text(modifier = Modifier.weight(1f), text = title)
-            Icon(imageVector = Icons.Default.ArrowForward, contentDescription = null, tint = MaterialTheme.colors.onSurface)
+            Icon(
+                imageVector = Icons.Default.ArrowForward,
+                contentDescription = null,
+                tint = MaterialTheme.colors.onSurface
+            )
         }
     }
 }

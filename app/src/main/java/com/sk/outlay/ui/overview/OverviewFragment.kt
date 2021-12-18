@@ -13,9 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.accompanist.insets.ProvideWindowInsets
-import com.sk.outlay.theme.OutlayTheme
 import com.sk.outlay.R
-import com.sk.outlay.data.dao.TotalExpensesAmount
+import com.sk.outlay.data.models.TotalExpensesAmount
+import com.sk.outlay.theme.OutlayTheme
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.util.*
