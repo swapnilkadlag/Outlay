@@ -2,10 +2,21 @@ package com.sk.outlay.ui.accounts
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sk.outlay.data.enums.AccountType
@@ -30,40 +41,50 @@ fun AccountName(
 
 @Composable
 fun AccountType(
-    accountType: AccountType,
+    selectedAccountType: AccountType,
     onAccountTypeChanged: (AccountType) -> Unit,
 ) {
-    Text(text = "Type")
+    val (expanded, setExpanded) = remember { mutableStateOf(false) }
+    val items = AccountType.values()
+    Text(text = "Type", Modifier.fillMaxWidth())
     Spacer(modifier = Modifier.height(8.dp))
-    RadioButtonWithText(
-        text = AccountType.Bank.value,
-        selected = accountType == AccountType.Bank,
-        onClick = { onAccountTypeChanged(AccountType.Bank) },
-    )
-    Spacer(modifier = Modifier.height(8.dp))
-    RadioButtonWithText(
-        text = AccountType.CreditCard.value,
-        selected = accountType == AccountType.CreditCard,
-        onClick = { onAccountTypeChanged(AccountType.CreditCard) },
-    )
-    Spacer(modifier = Modifier.height(8.dp))
-    RadioButtonWithText(
-        text = AccountType.EWallet.value,
-        selected = accountType == AccountType.EWallet,
-        onClick = { onAccountTypeChanged(AccountType.EWallet) },
-    )
-    Spacer(modifier = Modifier.height(8.dp))
-    RadioButtonWithText(
-        text = AccountType.Cash.value,
-        selected = accountType == AccountType.Cash,
-        onClick = { onAccountTypeChanged(AccountType.Cash) },
-    )
-    Spacer(modifier = Modifier.height(8.dp))
-    RadioButtonWithText(
-        text = AccountType.Other.value,
-        selected = accountType == AccountType.Other,
-        onClick = { onAccountTypeChanged(AccountType.Other) },
-    )
+    Column(
+        modifier = Modifier
+            .background(MaterialTheme.colors.surface, MaterialTheme.shapes.small)
+            .clickable { setExpanded(true) }
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(16.dp)
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = selectedAccountType.value,
+                    Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    style = MaterialTheme.typography.h6,
+                )
+                Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
+            }
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { setExpanded(false) },
+                modifier = Modifier.background(MaterialTheme.colors.surface)
+            ) {
+                items.forEach { at ->
+                    DropdownMenuItem(onClick = {
+                        onAccountTypeChanged(at)
+                        setExpanded(false)
+                    }) {
+                        Text(text = at.value)
+                    }
+                }
+            }
+        }
+    }
 }
 
 @Composable
@@ -107,6 +128,7 @@ fun AccountEditorContent(
     }
 }
 
+@ExperimentalMaterialApi
 @Preview(showSystemUi = true, uiMode = UI_MODE_NIGHT_YES)
 @Preview(showSystemUi = true, uiMode = UI_MODE_NIGHT_NO)
 @Composable
