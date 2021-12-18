@@ -66,7 +66,7 @@ class AccountEditorViewModel @AssistedInject constructor(
             account = repository.getAccount(accountId)
             accountName = account!!.name
             accountType = account!!.type
-            accountDetails = account!!.details ?: ""
+            accountDetails = account!!.details
         }
     }
 

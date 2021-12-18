@@ -1,16 +1,16 @@
 package com.sk.outlay.data
 
-import com.sk.outlay.data.dao.TotalExpensesAmount
 import com.sk.outlay.data.entities.Account
 import com.sk.outlay.data.enums.AccountType
-import com.sk.outlay.data.enums.getRandomOutlayColor
+import com.sk.outlay.data.models.TotalExpensesAmount
+import com.sk.outlay.utils.getColorForString
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(private val db: OutlayDatabase) : Repository {
     override fun getTotalExpenses(): Flow<TotalExpensesAmount> {
-        return db.transactionDao().getTotalExpensesFromCurrentCycle()
+        return db.transactionDao().getTotalExpensesForMonth()
     }
 
     override suspend fun getAccount(id: UUID): Account {
@@ -28,7 +28,7 @@ class RepositoryImpl @Inject constructor(private val db: OutlayDatabase) : Repos
             name = name,
             type = type,
             details = details,
-            color = getRandomOutlayColor(),
+            color = getColorForString(name),
         )
         db.accountDao().insert(account)
     }

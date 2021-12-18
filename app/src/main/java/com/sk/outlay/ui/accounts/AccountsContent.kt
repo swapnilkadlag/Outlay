@@ -12,30 +12,44 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sk.outlay.data.entities.Account
 import com.sk.outlay.data.enums.AccountType
-import com.sk.outlay.data.enums.getRandomOutlayColor
 import com.sk.outlay.theme.outlayColor
 import com.sk.outlay.ui.common.AddFab
+import com.sk.outlay.ui.common.HorizontalSpace
 import com.sk.outlay.ui.common.OutlayUI
 import com.sk.outlay.ui.common.Toolbar
+import com.sk.outlay.utils.getColorForString
 import java.util.*
 
 @Composable
 fun AccountItem(account: Account, onAccountClicked: (Account) -> Unit) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        modifier = Modifier.padding(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Box(
             modifier = Modifier
                 .clip(MaterialTheme.shapes.small)
                 .background(outlayColor(outlayColor = account.color))
-                .size(48.dp)
-        )
+                .size(48.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = account.name.first().toString(),
+                color = MaterialTheme.colors.onPrimary,
+                textAlign = TextAlign.Center
+            )
+        }
+        HorizontalSpace(space = 16.dp)
         Column(
             Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
                 .clickable { onAccountClicked(account) }) {
             Text(modifier = Modifier.fillMaxWidth(), text = account.name)
             CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
@@ -87,17 +101,29 @@ fun AccountsContentPreview() {
                     "State bank of India",
                     AccountType.Bank,
                     "",
-                    getRandomOutlayColor(),
+                    getColorForString("State bank of India"),
                 ),
                 Account(
-                    UUID.randomUUID(), "Paytm Wallet", AccountType.EWallet, "",
-                    getRandomOutlayColor(),
+                    UUID.randomUUID(),
+                    "Paytm Wallet",
+                    AccountType.EWallet,
+                    "",
+                    getColorForString("Paytm Wallet"),
                 ),
                 Account(
-                    UUID.randomUUID(), "HDFC Credit card", AccountType.CreditCard, "",
-                    getRandomOutlayColor(),
+                    UUID.randomUUID(),
+                    "HDFC Credit card",
+                    AccountType.CreditCard,
+                    "",
+                    getColorForString("HDFC Credit card"),
                 ),
-                Account(UUID.randomUUID(), "Cash", AccountType.Cash, "", getRandomOutlayColor()),
+                Account(
+                    UUID.randomUUID(),
+                    "Cash",
+                    AccountType.Cash,
+                    "",
+                    getColorForString("Cash")
+                ),
             ),
             onAddClicked = {},
             onBackPressed = {},

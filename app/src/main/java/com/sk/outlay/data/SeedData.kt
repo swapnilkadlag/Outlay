@@ -1,11 +1,11 @@
 package com.sk.outlay.data
 
-import com.sk.outlay.data.entities.Cycle
 import com.sk.outlay.data.entities.*
 import com.sk.outlay.data.enums.AccountType
+import com.sk.outlay.data.enums.BudgetType
 import com.sk.outlay.data.enums.TransactionStatus
 import com.sk.outlay.data.enums.TransactionType
-import com.sk.outlay.data.enums.getRandomOutlayColor
+import com.sk.outlay.utils.getColorForString
 import com.sk.outlay.utils.monthEndDate
 import com.sk.outlay.utils.monthStartDate
 import org.threeten.bp.LocalDate
@@ -13,27 +13,28 @@ import org.threeten.bp.LocalTime
 import java.util.*
 
 object SeedData {
-    val cycle = Cycle(
-        id = UUID.randomUUID(),
-        startDate = LocalDate.now().monthStartDate(),
-        endDate = LocalDate.now().monthEndDate(),
-    )
-
     val accounts = listOf(
         Account(
             id = UUID.randomUUID(),
             name = "Cash",
             type = AccountType.Cash,
             details = "",
-            color = getRandomOutlayColor(),
+            color = getColorForString("Cash"),
         ),
         Account(
             id = UUID.randomUUID(),
             name = "Other",
             type = AccountType.Other,
             details = "",
-            color = getRandomOutlayColor(),
+            color = getColorForString("Other"),
         ),
+    )
+
+    val budget = Budget(
+        id = UUID.randomUUID(),
+        amount = 0f,
+        categoryId = null,
+        type = BudgetType.Total,
     )
 
     val categories = listOf(
@@ -41,7 +42,7 @@ object SeedData {
             id = UUID.randomUUID(),
             name = "Other",
             limit = 0f,
-            color = getRandomOutlayColor(),
+            color = getColorForString("Other"),
         )
     )
 
@@ -56,7 +57,7 @@ object SeedData {
         LocalTime.now(),
         LocalDate.now(),
         LocalTime.now(),
-        TransactionStatus.COMPLETED,
-        TransactionType.SENT,
+        TransactionStatus.Completed,
+        TransactionType.Sent,
     )
 }
