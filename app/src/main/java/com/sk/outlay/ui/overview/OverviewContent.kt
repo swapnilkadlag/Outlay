@@ -7,6 +7,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Category
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -78,6 +79,7 @@ fun OverviewContent(
     totalExpensesAmount: String,
     onAddClicked: () -> Unit,
     onAccountsClick: () -> Unit,
+    onCategoriesClick: () -> Unit,
 ) {
     Scaffold(
         topBar = { Toolbar(onBackPressed = {}, title = "Overview", false) },
@@ -91,6 +93,12 @@ fun OverviewContent(
                 icon = Icons.Default.AccountBalance,
                 onClick = onAccountsClick
             )
+            VerticalSpace(space = 16.dp)
+            OverviewNavigationButton(
+                title = "Categories",
+                icon = Icons.Default.Category,
+                onClick = onCategoriesClick,
+            )
         }
     }
 }
@@ -100,6 +108,11 @@ fun OverviewContent(
 @Composable
 fun OverviewContentPreview() {
     OutlayTheme {
-        OverviewContent(totalExpensesAmount = "$123,45.60", onAddClicked = {}, onAccountsClick = {})
+        OverviewContent(
+            totalExpensesAmount = "$123,45.60",
+            onAddClicked = {},
+            onAccountsClick = {},
+            onCategoriesClick = {},
+        )
     }
 }

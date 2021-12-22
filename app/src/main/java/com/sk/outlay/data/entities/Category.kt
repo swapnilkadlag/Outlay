@@ -10,6 +10,5 @@ data class Category(
     @PrimaryKey
     val id: UUID,
     val name: String,
-    val limit: Float,
     val color: OutlayColor,
 )

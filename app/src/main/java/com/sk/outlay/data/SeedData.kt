@@ -41,7 +41,6 @@ object SeedData {
         Category(
             id = UUID.randomUUID(),
             name = "Other",
-            limit = 0f,
             color = getColorForString("Other"),
         )
     )

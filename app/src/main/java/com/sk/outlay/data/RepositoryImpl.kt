@@ -1,6 +1,7 @@
 package com.sk.outlay.data
 
 import com.sk.outlay.data.entities.Account
+import com.sk.outlay.data.entities.Category
 import com.sk.outlay.data.enums.AccountType
 import com.sk.outlay.data.models.TotalExpensesAmount
 import com.sk.outlay.utils.getColorForString
@@ -35,5 +36,27 @@ class RepositoryImpl @Inject constructor(private val db: OutlayDatabase) : Repos
 
     override suspend fun updateAccount(account: Account) {
         db.accountDao().update(account)
+    }
+
+    override fun getCategories(): Flow<List<Category>> {
+        return db.categoryDao().getCategories()
+    }
+
+    override suspend fun getCategory(id: UUID): Category {
+        return db.categoryDao().getCategory(id)
+    }
+
+    override suspend fun createCategory(name: String) {
+        require(name.isNotBlank())
+        val category = Category(
+            id = UUID.randomUUID(),
+            name = name,
+            color = getColorForString(name),
+        )
+        db.categoryDao().insert(category)
+    }
+
+    override suspend fun updateCategory(category: Category) {
+        db.categoryDao().update(category)
     }
 }

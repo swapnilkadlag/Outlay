@@ -42,6 +42,7 @@ class OverviewFragment : Fragment() {
                             numberFormat.format(totalExpensesAmount.totalAmount),
                             ::navigateToTransactionScreen,
                             ::navigateToAccounts,
+                            ::navigateToCategories,
                         )
                     }
                 }
@@ -56,5 +57,9 @@ class OverviewFragment : Fragment() {
 
     private fun navigateToAccounts() {
         findNavController().navigate(R.id.action_overview_to_accounts)
+    }
+
+    private fun navigateToCategories() {
+        findNavController().navigate(R.id.action_overview_to_categories)
     }
 }
