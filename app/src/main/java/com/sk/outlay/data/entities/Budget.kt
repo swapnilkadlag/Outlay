@@ -1,9 +1,6 @@
 package com.sk.outlay.data.entities
 
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.sk.outlay.data.enums.BudgetType
 import java.util.*
 
